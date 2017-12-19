@@ -130,7 +130,7 @@
                 <i class="icon icon-lg icon-github github"></i>
               </a>
           
-              <a class="nav2item" data-title="微博" href="/" target="_blank"title="微博" >
+              <a class="nav2item" data-title="微博" href="https://weibo.com/u/1984901127" target="_blank"title="微博" >
                 <i class="icon icon-lg icon-weibo weibo"></i>
               </a>
           
@@ -157,7 +157,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Búsqueda">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -241,7 +241,7 @@
     <div class="content">
         
 <span class="post-time">
-    Última actualización<time datetime="2017-12-19T01:56:56.135Z" itemprop="dateUpdated">2017-12-19 09:56:56</time>
+    Last updated: <time datetime="2017-12-19T01:56:56.135Z" itemprop="dateUpdated">2017-12-19 09:56:56</time>
 </span>
 
 
@@ -258,6 +258,12 @@
 </blockquote>
 
         
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
 
 
         <div class="post-footer">
@@ -335,7 +341,7 @@
             <i class="icon icon-lg icon-copyright"></i>
             2017
             <i class="icon icon-lg icon-heart"></i>
-            <a href="http://zz1985summer.github.io">jaon-zhang.tech</a>
+            <a href="http://zz1985summer.github.io">http://jaon-zhang.tech</a>
             <br/>
             Power by
             <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
@@ -365,12 +371,29 @@
         </span>
         <br/>
         
-        <span class="license">Este blog está licenciado bajo una <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">licencia internacional Creative Commons Attribution 4.0</a>.</span>
+        <span class="license">This blog is licensed under a <a rel="license" rel="external nofollow" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
     </div>      
 </footer>
     </main>
     
         
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/dog.png" alt="打赏二维码">
+        </div>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
 
     
     <div class="mask" id="mask"></div>
@@ -428,7 +451,7 @@
 
 <!-- 主题配置脚本 -->
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 </script>
 
 <!-- jquery -->
