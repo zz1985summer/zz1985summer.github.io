@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Ghost_Bug</title>
+  <title>Ghost_Jason</title>
   
-  
+  <subtitle>非正式全栈Web工程师</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://zz1985summer.github.io/"/>
   <updated>2017-12-19T01:56:56.135Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://zz1985summer.github.io/</id>
   
   <author>
     <name>Jason Zhang</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2017/12/19/hello-world/"/>
-    <id>http://yoursite.com/2017/12/19/hello-world/</id>
+    <link href="http://zz1985summer.github.io/2017/12/19/hello-world/"/>
+    <id>http://zz1985summer.github.io/2017/12/19/hello-world/</id>
     <published>2017-12-19T01:56:56.135Z</published>
     <updated>2017-12-19T01:56:56.135Z</updated>
     
