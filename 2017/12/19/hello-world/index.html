@@ -532,7 +532,7 @@ $("#name").bumpyText();
 
 /* 网站运行时间 */
 setInterval(function () {
-	setTime("2017/10/11");
+	setTime("2017/12/19");
 }, 1000);
 
 /* 文章块的淡出 */
@@ -548,7 +548,12 @@ postshow();
 G($(".post-content"), location.href, "Jason Zhang");
 
 
-
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
 
 </script>
 
