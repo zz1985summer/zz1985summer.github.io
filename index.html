@@ -178,10 +178,8 @@
                 <div class="abstract-content">
                     部署环境首先 hexo 部署需要 nodejs 和 git 分别安装这两个环境工具
 安装 hexo进入想部署的 blog 路径
-1npm install hexo-cli -g
-遇到的坑部署 Hexo 博客到 Github Pages 时遇到的一个坑
-1.当 使用 git 仓库部署时
-1234fatal: &apos;github.com&apos; does not appear to be a git repositoryfatal: Could not read from remote repository.Please make sure you have the correct...
+1234567891011npm install hexo-cli -ghexo init &lt;folder&gt;cd &lt;folder&gt;npm installhexo ghexo s浏览器访问:http://localhost:4000
+安装相关插件12345678910111213npm install hexo-generator-index --savenpm install hexo-generator-archive --savenp...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -190,32 +188,6 @@
                 <!-- date  -->
                 <div class="abstract-date">
                     <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/21</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/12/19/hello-world/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Hello World</span>
-                    </h2>
-                <div class="abstract-content">
-                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/19</span>
                 </div>
             </div>
         </article>
@@ -353,14 +325,7 @@ More...
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 2 </div>
+    <div class="total-archive"> Total : 1 </div>
     
     <div class="post-archive">
     
@@ -373,11 +338,6 @@ More...
     
         <li class="archive-post-item">
             <span class="archive-post-date">12/21</span><a class="archive-post-title" href= "/2017/12/21/To-deploy-hexo-blog/" >To deploy hexo blog</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/19</span><a class="archive-post-title" href= "/2017/12/19/hello-world/" >Hello World</a>
         </li>
     
     </div>
