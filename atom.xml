@@ -5,9 +5,9 @@
   <subtitle>非正式全栈Web工程师</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://zz1985summer.github.io/"/>
+  <link href="http://jason-zhang.tech/"/>
   <updated>2017-12-21T06:02:35.406Z</updated>
-  <id>http://zz1985summer.github.io/</id>
+  <id>http://jason-zhang.tech/</id>
   
   <author>
     <name>Jason Zhang</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>To deploy hexo blog</title>
-    <link href="http://zz1985summer.github.io/2017/12/21/To-deploy-hexo-blog/"/>
-    <id>http://zz1985summer.github.io/2017/12/21/To-deploy-hexo-blog/</id>
+    <link href="http://jason-zhang.tech/2017/12/21/To-deploy-hexo-blog/"/>
+    <id>http://jason-zhang.tech/2017/12/21/To-deploy-hexo-blog/</id>
     <published>2017-12-21T01:20:41.000Z</published>
     <updated>2017-12-21T06:02:35.406Z</updated>
     
