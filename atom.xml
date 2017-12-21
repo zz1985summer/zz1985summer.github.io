@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zz1985summer.github.io/"/>
-  <updated>2017-12-21T01:29:44.988Z</updated>
+  <updated>2017-12-21T01:58:04.423Z</updated>
   <id>http://zz1985summer.github.io/</id>
   
   <author>
@@ -21,30 +21,19 @@
     <link href="http://zz1985summer.github.io/2017/12/21/To-deploy-hexo-blog/"/>
     <id>http://zz1985summer.github.io/2017/12/21/To-deploy-hexo-blog/</id>
     <published>2017-12-21T01:20:41.000Z</published>
-    <updated>2017-12-21T01:29:44.988Z</updated>
+    <updated>2017-12-21T01:58:04.423Z</updated>
     
-    <content type="html"><![CDATA[<p>进入想部署的 blog 路径下</p><pre>​    <code>​        npm install hexo-cli -g​    </code></pre><p>部署 Hexo 博客到 Github Pages 时遇到的一个坑</p><p>1.当 使用 git 仓库部署时</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fatal: &apos;github.com&apos; does not appear to be a git repository</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure><p>2.当使用 HTTPS 仓库 部署时</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error: bash: /dev/tty: No such device or address</span><br><span class="line">error: failed to execute prompt script (exit code 1)</span><br><span class="line">fatal: could not read Username for &apos;https://github.com&apos;: Invalid argument</span><br></pre></td></tr></table></figure><p>解决方法</p><p>使用带用户名和密码的 HTTPS 链接 </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://&lt;yourusername&gt;:&lt;yourpwd&gt;@github.com/zz1985summer/zz1985summer.github.io.git</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>进入想部署的 blog 路径</p><p>​<code><br>npm install hexo-cli -g<br></code></p><p>部署 Hexo 博客到 Github Pages 时遇到的一个坑</p><p>1.当 使用 git 仓库部署时</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fatal: &apos;github.com&apos; does not appear to be a git repository</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure><p>2.当使用 HTTPS 仓库 部署时</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error: bash: /dev/tty: No such device or address</span><br><span class="line">error: failed to execute prompt script (exit code 1)</span><br><span class="line">fatal: could not read Username for &apos;https://github.com&apos;: Invalid argument</span><br></pre></td></tr></table></figure><p>解决方法</p><p>使用带用户名和密码的 HTTPS 链接 </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://&lt;yourusername&gt;:&lt;yourpwd&gt;@github.com/zz1985summer/zz1985summer.github.io.git</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;进入想部署的 blog 路径下&lt;/p&gt;
-&lt;pre&gt;
-
-​    &lt;code&gt;
-
-​        npm install hexo-cli -g
-
-​    &lt;/code&gt;
-
-&lt;/pre&gt;
-
-
-
-
-
-&lt;p&gt;部署 Hexo 博客到 Github Pages 时遇到的一个坑&lt;/
+        &lt;p&gt;进入想部署的 blog 路径&lt;/p&gt;
+&lt;p&gt;​&lt;code&gt;&lt;br&gt;npm install hexo-cli -g&lt;br&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;部署 Hexo 博客到 Github Pages 时遇到的一个坑&lt;/p&gt;
+&lt;p&gt;1.当 使用 git 仓库部署时&lt;/p&gt;
+&lt;
       
     
     </summary>
