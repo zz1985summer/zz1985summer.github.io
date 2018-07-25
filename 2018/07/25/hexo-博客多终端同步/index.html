@@ -181,30 +181,31 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <ul>
-<li>在其中一个终端操作，push 本地文件夹 Blog 中的必要文件到 yourname.github.io 的 hexo 分支上  </li>
+        <h2 id="在不同的终端同步维护同一个-hexo-博客"><a href="#在不同的终端同步维护同一个-hexo-博客" class="headerlink" title="在不同的终端同步维护同一个 hexo 博客"></a>在不同的终端同步维护同一个 hexo 博客</h2><ul>
+<li><p>在其中一个终端操作，push 本地文件夹 Blog 中的必要文件到 yourname.github.io 的 hexo 分支上  </p>
+  <pre><code>git init //初始化本地仓库
+  git remote add origin git@github.com:yourname/yourname.github.io.git  //将本地仓库与远程仓库对接  
+  git add .  //添加所有本地文件到 git  
+  /* 如果自己的主题是克隆下来的，先把主题下的 .git 文件夹和 .gitignore 文件删除，不然会上传不了 */  
+  git commit -m " hexo 配置文件 "  
+  git branch hexo  //新建分支  
+  git checkout hexo  //切换到分支  
+  git push origin hexo  //push 到 github 项目的 hexo 分支上</code></pre>  
+
+
+</li>
 </ul>
-<pre><code>git init //初始化本地仓库
-git remote add origin git@github.com:yourname/yourname.github.io.git  //将本地仓库与远程仓库对接  
-git add .  //添加所有本地文件到 git  
-/* 如果自己的主题是克隆下来的，先把主题下的 .git 文件夹和 .gitignore 文件删除，不然会上传不了 */  
-git commit -m " hexo 配置文件 "  
-git branch hexo  //新建分支  
-git checkout hexo  //切换到分支  
-git push origin hexo  //push 到 github 项目的 hexo 分支上</code></pre>  
-
-
 <p>这样你的 github 项目中就会多出一个 Hexo 分支， 这个就是用于多终端同步的。</p>
 <ul>
-<li>另一终端完成 clone 和 push 更新<br>安装好必备环境，git ，nodejs ，hexo  <pre><code>git clone -b hexo git@github.com:yourname/yourname.github.io.git  //将 github 中的 hexo 分支 clone 到本地  
-cd yourname.github.io  //切换到刚刚 clone 的文件夹内  
-npm install  //安装必要组件  
-hexo new post  "new blog name"    //新建博客  
-git add source   //经测试每次只要更新 source 中的文件到 github 即可，因为只是新建了一篇文章  
-git commit -m "xx"  
-git push origin hexo //更新分支   
-hexo d -g  //更新博客 
-</code></pre></li>
+<li>另一终端完成 clone 和 push 更新<br>安装好必备环境，git ，nodejs ，hexo    <pre><code>git clone -b hexo git@github.com:yourname/yourname.github.io.git  //将 github 中的 hexo 分支 clone 到本地  
+  cd yourname.github.io  //切换到刚刚 clone 的文件夹内  
+  npm install  //安装必要组件  
+  hexo new post  "new blog name"    //新建博客  
+  git add source   //经测试每次只要更新 source 中的文件到 github 即可，因为只是新建了一篇文章  
+  git commit -m "xx"  
+  git push origin hexo //更新分支   
+  hexo d -g  //更新博客 
+  </code></pre></li>
 </ul>
 
     </article>
@@ -305,7 +306,7 @@ hexo d -g  //更新博客
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在不同的终端同步维护同一个-hexo-博客"><span class="toc-number">1.</span> <span class="toc-text"><a href="#&#x5728;&#x4E0D;&#x540C;&#x7684;&#x7EC8;&#x7AEF;&#x540C;&#x6B65;&#x7EF4;&#x62A4;&#x540C;&#x4E00;&#x4E2A;-hexo-&#x535A;&#x5BA2;" class="headerlink" title="&#x5728;&#x4E0D;&#x540C;&#x7684;&#x7EC8;&#x7AEF;&#x540C;&#x6B65;&#x7EF4;&#x62A4;&#x540C;&#x4E00;&#x4E2A; hexo &#x535A;&#x5BA2;"></a>&#x5728;&#x4E0D;&#x540C;&#x7684;&#x7EC8;&#x7AEF;&#x540C;&#x6B65;&#x7EF4;&#x62A4;&#x540C;&#x4E00;&#x4E2A; hexo &#x535A;&#x5BA2;</span></a></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>
