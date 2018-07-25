@@ -170,6 +170,122 @@
     
     
         <article class="index-post">
+            <a class="content-show-full" href = "/2018/07/25/hexo-博客多终端同步/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>hexo 博客多终端同步</span>
+                    </h2>
+                <div class="abstract-content">
+                    
+在其中一个终端操作，push 本地文件夹 Blog 中的必要文件到 yourname.github.io 的 hexo 分支上  
+
+git init //初始化本地仓库
+git remote add origin git@github.com:yourname/yourname.github.io.git  //将本地仓库与远程仓库对接  
+git add .  //添加所有本地文件到 git  
+/* 如果自己的主题是克隆下来的，先把主题下的 .git 文件夹和 .gitignore 文件删除，不然会上传不了 */  
+git commit -m " hexo 配置文件 "  
+g...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/07/25</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2018/04/17/websocket-2018/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>[Untitled Post]</span>
+                    </h2>
+                <div class="abstract-content">
+                    WebSocketWebSocket是一种在单个TCP连接上进行全双工通讯的协议。WebSocket通信协议于2011年被IETF定为标准RFC 6455，并由RFC7936补充规范。WebSocket API也被W3C定为标准。
+WebSocket使得客户端和服务器之间的数据交换变得更加简单，允许服务端主动向客户端推送数据。在WebSocket API中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。  
+Socket.ioapi: https://socket.io/docs/socket.io 是一个基于 engine.io 开发的封装了...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/04/17</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2017/12/29/goodbye-my-2017/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>goodbye,my 2017!</span>
+                    </h2>
+                <div class="abstract-content">
+                    2017 已结过去，小小总结一下，然后展望一下
+工作进行前端的加深培训学习。
+年度阅读工具kindle 499 + 实体书网上看很多人年度阅读都 20 本书起，无奈个人闲暇时间除了看娃，阅读，有时候还花在玩游戏上，所以年度也就看了这几本，
+其中 《明朝那些事儿》 是1-7本合集，目前应该是第5本的进度。  
+实体书大概就这几本 ： 《我的前半生》 《嫌疑人 X 的献身》 《白夜行》 《白鹿原》
+年度音乐工具之前是 QQ 音乐+网易云音乐，但是时常的发觉所有的音乐软件的每日推送都越来越少好听的歌曲，之后网上被乐彼 l3 pro 的木质背面吸引住，但是觉得太贵了，退而求其次入手了乐彼 l3 ...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/29</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2017/12/23/JavaScript-理解闭包原型链/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>JavaScript 理解闭包原型链</span>
+                    </h2>
+                <div class="abstract-content">
+                    首先此文是学习过程中的个人理解，如有偏颇，欢迎斧正关于闭包
+function foo(){  
+    var i=999;  
+    return function (){  
+        console.log(i+1000);  
+    }  
+}  
+
+var f1=foo();  
+f1();              //1999  
+  
+
+foo 里面的那个匿名函数就叫闭包，在没有这个闭包之前，外层函数 f1, 是无法调用foo 函数局部变量 i 的值的.
+所以闭包可以说就是解决外层函数 f1 要读取某函数 foo 的局部变量，正常情况作用域变量只允许局部作用域往...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/23</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="content-show-full" href = "/2017/12/21/To-deploy-hexo-blog/" >
                     <h2 class="abstract-title">
                         
@@ -325,15 +441,82 @@
     
     
     
-    <div class="total-archive"> Total : 1 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 5 </div>
     
     <div class="post-archive">
     
     
     
     
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/hexo-博客多终端同步/" >hexo 博客多终端同步</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/17</span><a class="archive-post-title" href= "/2018/04/17/websocket-2018/" >[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2017/12/29/goodbye-my-2017/" >goodbye,my 2017!</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/23</span><a class="archive-post-title" href= "/2017/12/23/JavaScript-理解闭包原型链/" >JavaScript 理解闭包原型链</a>
+        </li>
     
     
         <li class="archive-post-item">
