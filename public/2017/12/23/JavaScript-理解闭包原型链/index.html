@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        JavaScript 理解闭包原型链 · Ghost_Bug.
+        
+    </title>
+    <link rel="icon" href= /assets/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro {
+            position: relative;
+            width: 100%;
+            height: 50vh;
+            overflow: hidden;
+            box-shadow: -0.1rem 0 0.5rem 0 rgba(0, 0, 0, 0.8);
+        }
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171218 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Ghost_Bug.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">JavaScript 理解闭包原型链</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Ghost_Bug.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            JavaScript 理解闭包原型链
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/12/23</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="首先此文是学习过程中的个人理解，如有偏颇，欢迎斧正"><a href="#首先此文是学习过程中的个人理解，如有偏颇，欢迎斧正" class="headerlink" title="首先此文是学习过程中的个人理解，如有偏颇，欢迎斧正"></a>首先此文是学习过程中的个人理解，如有偏颇，欢迎斧正</h1><h1 id="关于闭包"><a href="#关于闭包" class="headerlink" title="关于闭包"></a>关于闭包</h1><pre><code>
+function foo(){  
+    var i=999;  
+    return function (){  
+        console.log(i+1000);  
+    }  
+}  
+
+var f1=foo();  
+f1();              //1999  
+</code></pre>  
+
+<p>foo 里面的那个匿名函数就叫闭包，在没有这个闭包之前，外层函数 f1, 是无法调用foo 函数局部变量 i 的值的.</p>
+<p>所以闭包可以说就是解决外层函数 f1 要读取某函数 foo 的局部变量，正常情况作用域变量只允许局部作用域往上读取外层的全局作用域变量。所以这里通过 foo 函数的内层匿名函数（也可以写成非匿名函数，最后将内层函数名作为返回值返回）往上读取 foo 的变量 i ，并将结果返回给外层函数。</p>
+<p>一句话概括:闭包就是某函数的外层函数通过该函数的闭包调用该函数的局部变量进行操作。</p>
+<p><strong style="color:red">注意</strong>: 局部变量 i 这里是不会自动释放的，虽然它是局部变量，但是被闭包函数引用了，而闭包函数又被外层 f1 函数引用了，所以需要手动的 f1=null; 来释放 foo 的局部变量 i .  </p>
+<h1 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h1><pre><code>
+ex1:
+
+function globalvr(){
+    x=1;
+    console.log(x);   //1
+}
+
+console.log(x);    //1
+
+ex2:
+
+function globalvr2(){
+    var x=1;
+    console.log(x);   //1
+}
+
+console.log(x);     //ReferenceError  
+
+</code></pre>  
+
+<p>这里 ex1 里面 x 变量没有定义，函数会现在 globalvr 局部作用域查找，没有找到，在往上一层 window 全局查找，如果也没有找到，则在 window 全局作用域中自动生成一个变量 x 因此 ex1 里面的内外 x 值都为 1。</p>
+<h2 id="名词："><a href="#名词：" class="headerlink" title="名词："></a>名词：</h2><p>全局作用域 Window<br>函数作用域 Activation Object  </p>
+<pre><code>var a=10;
+function fun(){
+    console.log(a);
+    var a=100;
+    console.log(a);
+}
+fun();
+console.log(a);
+</code></pre><h2 id="作用域链："><a href="#作用域链：" class="headerlink" title="作用域链："></a>作用域链：</h2><p><img src="/images/jsprototype/scopetrain.jpeg" alt="">  </p>
+<ol>
+<li>js 运行时创建一个 ECS Execute Context Stack 函数执行上下文栈，浏览器主程序运行在这个栈中会先 new 一个 window 全局作用域对象，用来存储所有变量。</li>
+<li>全局作用域声明的变量 a 和 function fun 存储在window作用域对象中，其中 fun 引用类型实际指向 function 的定义位置，而function 中隐藏的属性 scope 由指回创建它的根 window 以标记它从哪调用创建出来。因此函数 window.fun() 这样屌用也是可以的。</li>
+<li>当函数 fun 被调用运行时，在 ECS 函数执行上下文中运行 fun 而此时 fun 生成其自己的局部作用域 AO </li>
+<li>fun 内定义的变量 a 会存在 AO 中，而 AO 有一个 <em>parent</em> 属性，指向其父源 window （也有可能是别的父对象）js 在查找使用变量时会先从最内层 AO 查找，如果 AO 没有则往其父源作用域中查找，一直往上链状查找，就形成了作用域链。  </li>
+</ol>
+<h1 id="原型对象"><a href="#原型对象" class="headerlink" title="原型对象"></a>原型对象</h1><p>prototype 在定义构造函数时，函数自动创建一个原型对象 prototype 用来集中保存子对象共有成员。</p>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p><img src="/images/jsprototype/inherit.jpeg" alt="">  </p>
+<p>1.new 方法让新对象的 _proto_ 属性指向父辈的 prototype 对象。<br>2.因此 prototype 中的方法变量子对象可以共用，即为继承父对象方法变量。</p>
+<pre><code>
+ex:
+Person.prototype.sayName=function(){
+    console.log("hello,I'm"+this.name+"I'm"+this.age+"years old now.");
+}
+</code></pre>
+
+
+<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><p><img src="/images/jsprototype/prototype.png" alt="">  </p>
+<p>Array 构造函数中存储了所有数组共用的方法</p>
+<pre><code>
+var arr=new Array();
+console.log(arr._proto_==Array.prototype);  //true    
+</code></pre>
+
+<p>原型链就是由多级继承形成的这种链式结构就是原型链<br><img src="/images/jsprototype/prototrain.jpeg" alt=""></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/12/21/To-deploy-hexo-blog/" title= To deploy hexo blog >
+                    <span>Previous Post</span>
+                    <span>To deploy hexo blog</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "http://jason-zhang.tech/2017/12/23/JavaScript-理解闭包原型链/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "JavaScript 理解闭包原型链"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+			s.src = 'https://ghostbug.disqus.com/embed.js';
+			//s.src = 'https://ghost-bug-1.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:87706309@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/zz1985summer" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="https://weibo.com/1984901127" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#首先此文是学习过程中的个人理解，如有偏颇，欢迎斧正"><span class="toc-number">1.</span> <span class="toc-text"><a href="#&#x9996;&#x5148;&#x6B64;&#x6587;&#x662F;&#x5B66;&#x4E60;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x4E2A;&#x4EBA;&#x7406;&#x89E3;&#xFF0C;&#x5982;&#x6709;&#x504F;&#x9887;&#xFF0C;&#x6B22;&#x8FCE;&#x65A7;&#x6B63;" class="headerlink" title="&#x9996;&#x5148;&#x6B64;&#x6587;&#x662F;&#x5B66;&#x4E60;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x4E2A;&#x4EBA;&#x7406;&#x89E3;&#xFF0C;&#x5982;&#x6709;&#x504F;&#x9887;&#xFF0C;&#x6B22;&#x8FCE;&#x65A7;&#x6B63;"></a>&#x9996;&#x5148;&#x6B64;&#x6587;&#x662F;&#x5B66;&#x4E60;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x4E2A;&#x4EBA;&#x7406;&#x89E3;&#xFF0C;&#x5982;&#x6709;&#x504F;&#x9887;&#xFF0C;&#x6B22;&#x8FCE;&#x65A7;&#x6B63;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关于闭包"><span class="toc-number">2.</span> <span class="toc-text"><a href="#&#x5173;&#x4E8E;&#x95ED;&#x5305;" class="headerlink" title="&#x5173;&#x4E8E;&#x95ED;&#x5305;"></a>&#x5173;&#x4E8E;&#x95ED;&#x5305;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数作用域"><span class="toc-number">3.</span> <span class="toc-text"><a href="#&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;" class="headerlink" title="&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;"></a>&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#名词："><span class="toc-number">3.1.</span> <span class="toc-text"><a href="#&#x540D;&#x8BCD;&#xFF1A;" class="headerlink" title="&#x540D;&#x8BCD;&#xFF1A;"></a>&#x540D;&#x8BCD;&#xFF1A;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域链："><span class="toc-number">3.2.</span> <span class="toc-text"><a href="#&#x4F5C;&#x7528;&#x57DF;&#x94FE;&#xFF1A;" class="headerlink" title="&#x4F5C;&#x7528;&#x57DF;&#x94FE;&#xFF1A;"></a>&#x4F5C;&#x7528;&#x57DF;&#x94FE;&#xFF1A;</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原型对象"><span class="toc-number">4.</span> <span class="toc-text"><a href="#&#x539F;&#x578B;&#x5BF9;&#x8C61;" class="headerlink" title="&#x539F;&#x578B;&#x5BF9;&#x8C61;"></a>&#x539F;&#x578B;&#x5BF9;&#x8C61;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#继承"><span class="toc-number">5.</span> <span class="toc-text"><a href="#&#x7EE7;&#x627F;" class="headerlink" title="&#x7EE7;&#x627F;"></a>&#x7EE7;&#x627F;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原型链"><span class="toc-number">6.</span> <span class="toc-text"><a href="#&#x539F;&#x578B;&#x94FE;" class="headerlink" title="&#x539F;&#x578B;&#x94FE;"></a>&#x539F;&#x578B;&#x94FE;</span></a></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 2 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/23</span><a class="archive-post-title" href= "/2017/12/23/JavaScript-理解闭包原型链/" >JavaScript 理解闭包原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/21</span><a class="archive-post-title" href= "/2017/12/21/To-deploy-hexo-blog/" >To deploy hexo blog</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+
